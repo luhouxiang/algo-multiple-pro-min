@@ -1,0 +1,8 @@
+plots:
+  # type类型： Line：线段，两个端点的， Straight:直线， Candle:表示K线， Curve：曲线，例MA5
+  -
+    max_height: 0
+    chart_item:
+    -
+      file_name: data/20241006_28#SRL9.txt
+      type: Candle

@@ -1,0 +1,10 @@
+tzlocal>=5.0
+PySide6>=6.6
+pyqtgraph>=0.13
+numpy>=1.26
+pandas>=2.2
+matplotlib>=3.9
+pyzmq>=25.1
+plotly>=5.23
+# 模拟C++的函数重载功能
+multipledispatch>=1.0
