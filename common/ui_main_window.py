@@ -59,7 +59,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.add_chart_Item(conf["plots"], widget)  # 将页面加到plots中，然后加到widget中
 
         widget.add_cursor()
-        widget.update_all_history_data(datas)
+        # widget.update_all_history_data(datas)
 
         self.graphWidget = widget
         self.setCentralWidget(self.graphWidget)

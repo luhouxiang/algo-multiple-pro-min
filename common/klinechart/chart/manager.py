@@ -54,6 +54,8 @@ class BarManager:
         """
         Get total number of bars.
         """
+        if not self._all_chart_infos:
+            return 0
         return len(self._all_chart_infos[0][0].bars)
 
     def get_index_from_dt(self, dt: datetime) -> int:
