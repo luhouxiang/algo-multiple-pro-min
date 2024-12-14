@@ -51,15 +51,13 @@ def calc_bars(data_list, data_type: List[str]) -> BarDict:
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, conf):
         super().__init__()
-        datas: Dict[PlotIndex, PlotItemInfo] = load_data(conf)
-
+        self.conf = conf
         self.widget = ChartWidget(self)
         # obtain_data_from_algo(widget.manager.klines, datas)
 
         self.add_chart_Item(conf["plots"], self.widget)  # 将页面加到plots中，然后加到widget中
 
         self.widget.add_cursor()
-        self.widget.update_all_history_data(datas)  # 调整数据加载逻辑，使得加载一次即可完成
 
         self.graphWidget = self.widget
         self.setCentralWidget(self.graphWidget)
@@ -104,6 +102,9 @@ class MainWindow(QtWidgets.QMainWindow):
         if key == QtCore.Qt.Key_Escape:
             self.stock_list = []
             self.keyboard_genie.hide()
+        elif key == QtCore.Qt.Key_Enter:
+            datas: Dict[PlotIndex, PlotItemInfo] = load_data(self.conf)
+            self.widget.update_all_history_data(datas)  # 调整数据加载逻辑，使得加载一次即可完成
         else:
             text = event.text()
             if text.isalnum() or text.isalpha() or text.isdigit():
@@ -124,7 +125,6 @@ class MainWindow(QtWidgets.QMainWindow):
                 # current_text = self.keyboard_genie.input_line_edit.text()
                 # self.keyboard_genie.input_line_edit.setText(current_text + text)
             else:
-                self.up
                 super().keyPressEvent(event)
 
     def moveEvent(self, event):
