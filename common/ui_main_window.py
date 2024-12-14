@@ -52,16 +52,16 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, conf):
         super().__init__()
         datas: Dict[PlotIndex, PlotItemInfo] = load_data(conf)
-        widget = ChartWidget(self)
-        widget.manager.update_history_klines(datas[PlotIndex(0)][ItemIndex(0)].bars.values())
+
+        self.widget = ChartWidget(self)
         # obtain_data_from_algo(widget.manager.klines, datas)
 
-        self.add_chart_Item(conf["plots"], widget)  # 将页面加到plots中，然后加到widget中
+        self.add_chart_Item(conf["plots"], self.widget)  # 将页面加到plots中，然后加到widget中
 
-        widget.add_cursor()
-        # widget.update_all_history_data(datas)
+        self.widget.add_cursor()
+        self.widget.update_all_history_data(datas)  # 调整数据加载逻辑，使得加载一次即可完成
 
-        self.graphWidget = widget
+        self.graphWidget = self.widget
         self.setCentralWidget(self.graphWidget)
 
         # 加载股票代码和名称列表
@@ -124,6 +124,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 # current_text = self.keyboard_genie.input_line_edit.text()
                 # self.keyboard_genie.input_line_edit.setText(current_text + text)
             else:
+                self.up
                 super().keyPressEvent(event)
 
     def moveEvent(self, event):

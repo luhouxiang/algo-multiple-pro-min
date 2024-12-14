@@ -7,7 +7,7 @@ from PySide6.QtWidgets import QMessageBox
 showMessage = QMessageBox.question
 
 from PySide6 import QtGui, QtWidgets, QtCore
-from .object import PlotIndex, PlotItemInfo
+from .object import PlotIndex, ItemIndex, PlotItemInfo
 from .manager import BarManager
 from .base import (
     GREY_COLOR, WHITE_COLOR, CURSOR_COLOR, BLACK_COLOR,
@@ -190,6 +190,7 @@ class ChartWidget(pg.PlotWidget):
         """
         设置历史数据
         """
+        self.manager.update_history_klines(datas[PlotIndex(0)][ItemIndex(0)].bars.values())
         for plot_index, charts in self._plot_charts_dict.items():
             for chart_index, chart_item in enumerate(charts):
                 chart_info = datas[plot_index][chart_index]
